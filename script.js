@@ -63,7 +63,7 @@ const rollDiceFn = () => {
 };
 
 const holdFn = () => {
-  const WINNING_SCORE = 50_00;
+  const WINNING_SCORE = 50;
 
   if (playing) {
     // Add current score to global score
