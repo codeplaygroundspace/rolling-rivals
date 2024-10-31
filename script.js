@@ -74,8 +74,8 @@ btnHold.addEventListener('click', function () {
     document.getElementById(`score--${activePlayer}`).textContent =
       scores[activePlayer];
 
-    // check if active player score is >=100
-    if (scores[activePlayer] >= 10) {
+    // check if active player score is >=50
+    if (scores[activePlayer] >= 50) {
       // finish game
       playing = false;
       document
