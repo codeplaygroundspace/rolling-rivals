@@ -14,10 +14,9 @@ const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
 // Initial conditions
-
 let scores, currentScore, activePlayer, playing;
 
-const init = function () {
+const initFn = () => {
   scores = [0, 0];
   currentScore = 0;
   activePlayer = 0;
@@ -34,10 +33,8 @@ const init = function () {
   player0El.classList.add('player--active');
   player1El.classList.remove('player--active');
 };
-init();
 
-// Switch player
-const switchPlayer = function () {
+const switchPlayer = () => {
   currentScore = 0;
   document.getElementById(`current--${activePlayer}`).textContent =
     currentScore;
@@ -46,8 +43,7 @@ const switchPlayer = function () {
   player1El.classList.toggle('player--active');
 };
 
-// Roll dice
-btnRoll.addEventListener('click', function () {
+const rollDiceFn = () => {
   if (playing) {
     const dice = Math.trunc(Math.random() * 6 + 1);
     diceEl.classList.remove('hidden');
@@ -64,9 +60,11 @@ btnRoll.addEventListener('click', function () {
       switchPlayer();
     }
   }
-});
+};
 
-btnHold.addEventListener('click', function () {
+const holdFn = () => {
+  const WINNING_SCORE = 50_00;
+
   if (playing) {
     // Add current score to global score
     scores[activePlayer] += currentScore;
@@ -75,7 +73,7 @@ btnHold.addEventListener('click', function () {
       scores[activePlayer];
 
     // check if active player score is >=50
-    if (scores[activePlayer] >= 50) {
+    if (scores[activePlayer] >= WINNING_SCORE) {
       // finish game
       playing = false;
       document
@@ -89,6 +87,10 @@ btnHold.addEventListener('click', function () {
       switchPlayer();
     }
   }
-});
+};
 
-btnNew.addEventListener('click', init);
+btnRoll.addEventListener('click', rollDiceFn);
+btnHold.addEventListener('click', holdFn);
+btnNew.addEventListener('click', initFn);
+
+initFn();
